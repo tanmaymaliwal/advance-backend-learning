@@ -2,7 +2,7 @@
 
 A hands-on repository documenting my journey into backend engineering, distributed systems, containerization, caching, and scalable application architecture.
 
-The goal is to understand not only how to build backend services, but also how to make them reliable, maintainable, performance, and production-ready.
+The goal is to understand not only how to build backend services, but also how to make them **reliable, maintainable, performance,** and **production-ready.**
 
 ## Learning Modules
 
