@@ -48,7 +48,7 @@ Create a `.env` file using `.env.example` and configure your MongoDB connection 
 Start the services defined in your Compose file:
 
 ```bash
-docker compose up -d
+docker compose up
 ```
 
 Start the backend:
