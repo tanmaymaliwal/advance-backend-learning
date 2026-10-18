@@ -1,69 +1,115 @@
-# MongoDB vs Redis — Caching (Cache-Aside Pattern)
+# Redis: Cache-Aside Pattern, API Rate Limiting, OTP Expiration & BullMQ
 
-A Node.js and Express project exploring Redis caching and comparing direct MongoDB reads with Redis-backed reads.
+Implementing practical backend engineering concepts using Redis, Node.js, Express, MongoDB, and BullMQ, including cache-aside caching, API rate limiting, OTP generation with automatic expiration, and asynchronous job processing.
 
 ## Tech Stack
 
-- Node.js & Express
-- MongoDB — persistent data storage
-- Redis & ioredis — in-memory caching
-- Docker Compose — local service management
-
-## Architecture
-
-```mermaid
-flowchart TD
-    A[Client] --> B[Express Backend]
-    B --> C{Read Operation}
-    C -->|Direct Read| D[(MongoDB)]
-    C -->|Cached Read| E[(Redis)]
-    E -->|Cache Hit| F[Return Cached Data]
-    E -->|Cache Miss| D
-    D --> G[Return Database Data]
-    D -.-> H[Store in Redis]
-```
-
-**Cache hit:** Requested data exists in Redis and can be returned without querying MongoDB.
-
-**Cache miss:** Requested data is absent from Redis. In a cache-aside implementation, the backend fetches it from MongoDB and stores it in Redis for subsequent requests.
+- **Runtime:** Node.js
+- **Backend:** Express.js
+- **Database:** MongoDB
+- **Caching & Temporary Storage:** Redis
+- **Redis Client:** ioredis
+- **Job Queue:** BullMQ
+- **Containerization:** Docker & Docker Compose
 
 ## Features
 
-- Create users and store them in MongoDB.
-- Fetch data directly from MongoDB.
-- Fetch data using Redis.
-- Explore cache hits, cache misses, and read performance.
-- Run supporting services using Docker Compose.
+### 1. Redis Caching
 
-## Setup
+- Implemented the cache-aside pattern using Redis and MongoDB.
+- Return cached data directly on a cache hit.
+- Fetch data from MongoDB on a cache miss and store it in Redis.
+- Compare direct MongoDB reads with Redis-backed reads.
 
-```bash
-git clone <YOUR_REPOSITORY_URL>
-cd <REPOSITORY_NAME>/level-2
+### 2. API Rate Limiting
+
+- Restrict the number of requests a client can make within a configured limit.
+- Reject excessive requests to help protect backend endpoints.
+- Explore request throttling and API resource management.
+
+### 3. OTP Generation & Expiration
+
+- Generate OTPs for verification workflows.
+- Store OTPs in Redis with a 30-second time-to-live (TTL).
+- Automatically expire OTP entries after the configured duration.
+
+### 4. Asynchronous Job Queues with BullMQ
+
+- Create and enqueue background jobs using BullMQ.
+- Use Redis as the queue's backing store.
+- Process queued jobs asynchronously using workers.
+- Separate job processing from the main HTTP request flow.
+
+### 5. Docker Compose
+
+- Manage supporting services through Docker Compose.
+- Configure and run backend dependencies locally.
+- Simplify local development and service startup.
+
+## Architecture
+```
+flowchart TD
+    A[Client] --> B[Express Backend]
+
+    B --> C[Redis Caching]
+    C -->|Cache Hit| D[Return Cached Data]
+    C -->|Cache Miss| E[(MongoDB)]
+    E --> F[Store Result in Redis]
+
+    B --> G[Rate Limiting]
+    B --> H[OTP Generation]
+    H --> I[(Redis - 30s TTL)]
+
+    B --> J[BullMQ Queue]
+    J --> K[(Redis)]
+    K --> L[Background Worker]
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm
+- Docker Desktop
+- A MongoDB connection string
+
+### 1. Install dependencies
+```
 npm install
 ```
 
-Create a `.env` file using `.env.example` and configure your MongoDB connection and application settings.
+### 2. Configure environment variables
 
-Start the services defined in your Compose file:
+Create a `.env` file using `.env.example`:
+```
+PORT=8000
+MONGODB_URI=your_mongodb_connection_string
+REDIS_URL=redis://localhost:6379
+```
 
-```bash
+Update the MongoDB connection string and ensure the Redis URL matches your environment.
+
+### 3. Start supporting services
+```
 docker compose up
 ```
 
-Start the backend:
-
-```bash
+### 4. Start the backend
+```
 npm run dev
 ```
 
-## Learning Goals
+Use the scripts configured in `package.json`.
 
-- Understand Redis caching and the cache-aside pattern.
-- Compare direct database reads with cached reads.
-- Explore Docker Compose and backend service integration.
+## Key Concepts Learned
 
-## Future Improvements
+- Cache-aside pattern and cache hits versus cache misses.
+- Redis-based temporary storage and TTL expiration.
+- API rate limiting and request control.
+- Asynchronous processing using BullMQ queues and workers.
+- Integration of MongoDB, Redis, and Express.
+- Containerized development with Docker Compose.
 
-- Add cache expiration (TTL) and invalidation.
-- Benchmark response times under repeated requests.
+## Learning Goal
+
+Build a stronger understanding of backend engineering by implementing practical mechanisms for caching, request control, temporary data management, asynchronous processing, and service orchestration. in this change title something related to redis because in my repo i am creating 4-5 levels which have separate read.me so this is my level 2 so. remove level 2 and instead f advance backend engineering this is my repo title so something else
