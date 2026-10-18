@@ -47,7 +47,7 @@ Implementing practical backend engineering concepts using Redis, Node.js, Expres
 - Simplify local development and service startup.
 
 ## Architecture
-```
+```mermaid
 flowchart TD
     A[Client] --> B[Express Backend]
 
@@ -112,4 +112,4 @@ Use the scripts configured in `package.json`.
 
 ## Learning Goal
 
-Build a stronger understanding of backend engineering by implementing practical mechanisms for caching, request control, temporary data management, asynchronous processing, and service orchestration. in this change title something related to redis because in my repo i am creating 4-5 levels which have separate read.me so this is my level 2 so. remove level 2 and instead f advance backend engineering this is my repo title so something else
+Build a stronger understanding of backend engineering by implementing practical mechanisms for caching, request control, temporary data management, asynchronous processing, and service orchestration.
