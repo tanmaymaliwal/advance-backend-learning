@@ -2,16 +2,6 @@
 
 Implementing practical backend engineering concepts using Redis, Node.js, Express, MongoDB, and BullMQ, including cache-aside caching, API rate limiting, OTP generation with automatic expiration, and asynchronous job processing.
 
-## Tech Stack
-
-- **Runtime:** Node.js
-- **Backend:** Express.js
-- **Database:** MongoDB
-- **Caching & Temporary Storage:** Redis
-- **Redis Client:** ioredis
-- **Job Queue:** BullMQ
-- **Containerization:** Docker & Docker Compose
-
 ## Features
 
 ### 1. Redis Caching
@@ -100,6 +90,16 @@ npm run dev
 ```
 
 Use the scripts configured in `package.json`.
+
+## Tech Stack
+
+- **Runtime:** Node.js
+- **Backend:** Express.js
+- **Database:** MongoDB
+- **Caching & Temporary Storage:** Redis
+- **Redis Client:** ioredis
+- **Job Queue:** BullMQ
+- **Containerization:** Docker & Docker Compose
 
 ## Key Concepts Learned
 
