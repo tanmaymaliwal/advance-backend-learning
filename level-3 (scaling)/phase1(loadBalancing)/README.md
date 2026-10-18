@@ -10,23 +10,25 @@ The objective is to understand how multiple application instances can improve re
 
 ## Architecture
 
-```text
-                        Client
-                          |
-                          v
-                  NGINX Load Balancer
-                    localhost:3000
-                          |
-                 Upstream: backend
-                          |
-             +------------+------------+
-             |            |            |
-             v            v            v
-          Server 1     Server 2     Server 3
-          :8000        :8000        :8000
-             |            |            |
-             +------------+------------+
-                  Express Application
+```mermaid
+flowchart TD
+    A[Client] --> B["NGINX Load Balancer<br/>(localhost:3000)"]
+    B --> C["Upstream: backend<br/>(Uses Round-Robin)"]
+
+    C --> D["Server 1<br/>Port 8000"]
+    C --> E["Server 2<br/>Port 8000"]
+    C --> F["Server 3<br/>Port 8000"]
+
+    D --> G["Express Application"]
+    E --> G
+    F --> G
+
+    classDef client fill:#e8f0fe,stroke:#4285f4,color:#202124
+    classDef proxy fill:#e2f0d9,stroke:#548235,color:#202124
+    classDef server fill:#fff2cc,stroke:#bf9000,color:#202124
+    class A client
+    class B,C proxy
+    class D,E,F,G server
 ```
 
 ## Implementation
